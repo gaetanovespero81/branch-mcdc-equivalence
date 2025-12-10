@@ -1,0 +1,66 @@
+        -:    0:Source:and_chair/source/and4.c
+        -:    0:Graph:./and4.gcno
+        -:    0:Data:./and4.gcda
+        -:    0:Runs:14
+        -:    1:// and4.c - Homogeneous AND-only chain with 4 clauses: A && B && C && D
+        -:    2:
+        -:    3:#include <stdio.h>
+        -:    4:#include <stdlib.h>
+        -:    5:
+        -:    6:/*
+        -:    7: * pattern = 4-bit integer: pattern = 8*A + 4*B + 2*C + D
+        -:    8: * A is bit 3, B is bit 2, C is bit 1, D is bit 0.
+        -:    9: * patterns 0..15 cover all 16 combinations.
+        -:   10: *
+        -:   11: * Canonical classes for AND with 4 clauses:
+        -:   12: *  K1: A = 0                          -> patterns 0..7
+        -:   13: *  K2: A = 1, B = 0                   -> patterns 8,9,10,11
+        -:   14: *  K3: A = 1, B = 1, C = 0            -> patterns 12,13
+        -:   15: *  K4: A = 1, B = 1, C = 1, D = 0     -> pattern 14
+        -:   16: *  K0: A = 1, B = 1, C = 1, D = 1     -> pattern 15
+        -:   17: */
+        -:   18:
+        -:   19:static int pattern;
+        -:   20:
+function A called 14 returned 100% blocks executed 100%
+       14:   21:int A(void) { return (pattern >> 3) & 1; }
+function B called 14 returned 100% blocks executed 100%
+       14:   22:int B(void) { return (pattern >> 2) & 1; }
+function C called 14 returned 100% blocks executed 100%
+       14:   23:int C(void) { return (pattern >> 1) & 1; }
+function D called 14 returned 100% blocks executed 100%
+       14:   24:int D(void) { return (pattern >> 0) & 1; }
+        -:   25:
+function decision called 14 returned 100% blocks executed 100%
+       14:   26:int decision(void) {
+       14:   27:    int a = A();
+call    0 returned 100%
+       14:   28:    int b = B();
+call    0 returned 100%
+       14:   29:    int c = C();
+call    0 returned 100%
+       14:   30:    int d = D();
+call    0 returned 100%
+       14:   31:    if (a && b && c && d) {
+branch  0 taken 43% (fallthrough)
+branch  1 taken 57%
+branch  2 taken 33% (fallthrough)
+branch  3 taken 67%
+branch  4 taken 100% (fallthrough)
+branch  5 taken 0%
+branch  6 taken 50% (fallthrough)
+branch  7 taken 50%
+        1:   32:        return 1;
+        -:   33:    }
+       13:   34:    return 0;
+        -:   35:}
+        -:   36:
+function main called 14 returned 100% blocks executed 100%
+       14:   37:int main(int argc, char **argv) {
+       14:   38:    pattern = atoi(argv[1]);
+       14:   39:    int res = decision();
+call    0 returned 100%
+       14:   40:    printf("and4: pattern=%d -> E=%d\n", pattern, res);
+call    0 returned 100%
+       14:   41:    return res;
+        -:   42:}

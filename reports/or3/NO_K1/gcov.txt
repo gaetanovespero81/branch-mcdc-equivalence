@@ -1,0 +1,8 @@
+File 'or_chair/source/or3.c'
+Lines executed:100.00% of 15
+Branches executed:100.00% of 6
+Taken at least once:83.33% of 6
+Calls executed:100.00% of 5
+Creating 'or3.c.gcov'
+
+Lines executed:100.00% of 15

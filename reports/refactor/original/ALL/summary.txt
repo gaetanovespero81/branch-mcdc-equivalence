@@ -1,0 +1,5 @@
+Program: original
+Suite:   ALL
+Tests:   1 2 3
+Lines executed:100.00% of 6
+Taken at least once:100.00% of 6

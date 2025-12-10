@@ -1,0 +1,60 @@
+        -:    0:Source:or_chair/source/or3.c
+        -:    0:Graph:./or3.gcno
+        -:    0:Data:./or3.gcda
+        -:    0:Runs:7
+        -:    1:// or3.c - Homogeneous OR-only chain with 3 clauses: A || B || C
+        -:    2:
+        -:    3:#include <stdio.h>
+        -:    4:#include <stdlib.h>
+        -:    5:
+        -:    6:/*
+        -:    7: * pattern = 3-bit integer: pattern = 4*A + 2*B + C
+        -:    8: * A is bit 2, B is bit 1, C is bit 0.
+        -:    9: *
+        -:   10: * Canonical classes for OR with 3 clauses:
+        -:   11: *  Determining value is 1, non-determining is 0.
+        -:   12: *
+        -:   13: *  K1: A = 1                        -> patterns 4,5,6,7
+        -:   14: *  K2: A = 0, B = 1                 -> patterns 2,3
+        -:   15: *  K3: A = 0, B = 0, C = 1          -> pattern 1
+        -:   16: *  K0: A = 0, B = 0, C = 0          -> pattern 0
+        -:   17: */
+        -:   18:
+        -:   19:static int pattern;
+        -:   20:
+function A called 7 returned 100% blocks executed 100%
+        7:   21:int A(void) { return (pattern >> 2) & 1; }
+function B called 7 returned 100% blocks executed 100%
+        7:   22:int B(void) { return (pattern >> 1) & 1; }
+function C called 7 returned 100% blocks executed 100%
+        7:   23:int C(void) { return (pattern >> 0) & 1; }
+        -:   24:
+function decision called 7 returned 100% blocks executed 100%
+        7:   25:int decision(void) {
+        7:   26:    int a = A();
+call    0 returned 100%
+        7:   27:    int b = B();
+call    0 returned 100%
+        7:   28:    int c = C();
+call    0 returned 100%
+        7:   29:    if (a || b || c) {
+branch  0 taken 43% (fallthrough)
+branch  1 taken 57%
+branch  2 taken 33% (fallthrough)
+branch  3 taken 67%
+branch  4 taken 0% (fallthrough)
+branch  5 taken 100%
+        6:   30:        return 1;
+        -:   31:    }
+        1:   32:    return 0;
+        -:   33:}
+        -:   34:
+function main called 7 returned 100% blocks executed 100%
+        7:   35:int main(int argc, char **argv) {
+        7:   36:    pattern = atoi(argv[1]);
+        7:   37:    int res = decision();
+call    0 returned 100%
+        7:   38:    printf("or3: pattern=%d -> E=%d\n", pattern, res);
+call    0 returned 100%
+        7:   39:    return res;
+        -:   40:}
