@@ -1,0 +1,63 @@
+        -:    0:Source:and_chair/source/and2.c
+        -:    0:Graph:./and2.gcno
+        -:    0:Data:./and2.gcda
+        -:    0:Runs:2
+        -:    1:// and2.c - Homogeneous AND-only chain with 2 clauses: A && B
+        -:    2:// This file is intentionally minimal: the only conditional branch
+        -:    3:// is the short-circuit decision we want to study.
+        -:    4:
+        -:    5:#include <stdio.h>
+        -:    6:#include <stdlib.h>
+        -:    7:
+        -:    8:/*
+        -:    9: * pattern = 2-bit integer: pattern = 2*A + B
+        -:   10: * A is bit 1, B is bit 0.
+        -:   11: *
+        -:   12: * Examples:
+        -:   13: *  pattern 0 -> A=0, B=0
+        -:   14: *  pattern 1 -> A=0, B=1
+        -:   15: *  pattern 2 -> A=1, B=0
+        -:   16: *  pattern 3 -> A=1, B=1
+        -:   17: *
+        -:   18: * Canonical classes for AND with 2 clauses:
+        -:   19: *  K1: A = 0          -> patterns 0,1
+        -:   20: *  K2: A = 1, B = 0   -> pattern 2
+        -:   21: *  K0: A = 1, B = 1   -> pattern 3
+        -:   22: */
+        -:   23:
+        -:   24:static int pattern;
+        -:   25:
+function A called 2 returned 100% blocks executed 100%
+        2:   26:int A(void) { return (pattern >> 1) & 1; }
+function B called 2 returned 100% blocks executed 100%
+        2:   27:int B(void) { return (pattern >> 0) & 1; }
+        -:   28:
+function decision called 2 returned 100% blocks executed 100%
+        2:   29:int decision(void) {
+        2:   30:    int a = A();
+call    0 returned 100%
+        2:   31:    int b = B();
+call    0 returned 100%
+        2:   32:    if (a && b) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+branch  2 taken 50% (fallthrough)
+branch  3 taken 50%
+        1:   33:        return 1;
+        -:   34:    }
+        1:   35:    return 0;
+        -:   36:}
+        -:   37:
+function main called 2 returned 100% blocks executed 100%
+        2:   38:int main(int argc, char **argv) {
+        -:   39:    // For the experiments we always pass a valid pattern (0..3),
+        -:   40:    // so we intentionally omit any argument checking to avoid
+        -:   41:    // introducing extra branches.
+        2:   42:    pattern = atoi(argv[1]);
+        -:   43:
+        2:   44:    int res = decision();
+call    0 returned 100%
+        2:   45:    printf("and2: pattern=%d -> E=%d\n", pattern, res);
+call    0 returned 100%
+        2:   46:    return res;
+        -:   47:}

@@ -1,0 +1,8 @@
+File 'original.c'
+Lines executed:100.00% of 6
+Branches executed:100.00% of 6
+Taken at least once:100.00% of 6
+No calls
+Creating 'original.c.gcov'
+
+Lines executed:100.00% of 6

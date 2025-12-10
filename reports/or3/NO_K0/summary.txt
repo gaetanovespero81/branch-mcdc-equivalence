@@ -1,0 +1,4 @@
+Suite: NO_K0
+Patterns: 1 2 3 4 5 6 7
+Lines executed:93.33% of 15
+Taken at least once:83.33% of 6

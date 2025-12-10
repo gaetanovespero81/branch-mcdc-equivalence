@@ -1,0 +1,8 @@
+File 'and_chair/source/and4.c'
+Lines executed:100.00% of 17
+Branches executed:100.00% of 8
+Taken at least once:100.00% of 8
+Calls executed:100.00% of 6
+Creating 'and4.c.gcov'
+
+Lines executed:100.00% of 17
